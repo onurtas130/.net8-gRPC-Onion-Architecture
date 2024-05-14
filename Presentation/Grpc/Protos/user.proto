@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+
+
+option csharp_namespace = "Grpc";
+
+package user;
+
+// The greeting service definition.
+service User {
+  // Sends a greeting
+  rpc Register (RegisterRequest) returns (ServiceResult);
+  rpc Login (LoginRequest) returns (ServiceResultExt);
+}
+
+// The request message containing the user's name.
+message RegisterRequest {
+  optional string email = 1;
+  optional string userName = 2;
+  optional string password = 3;
+}
+
+message LoginRequest {
+  optional string email = 1;
+  optional string password = 2;
+}
+
+// The response message containing the greetings.
+
+
+message ServiceResultExt{
+    optional bool status = 1;
+	optional string explanation = 2;
+	optional int32 totalCount = 3;
+    optional string token = 4;
+	optional google.protobuf.Timestamp expire = 5;
+}
+
+message ServiceResult{
+	optional bool status = 1;
+	optional string explanation = 2;
+}
+
+message JWTResultDTO{
+	optional string token = 1;
+	optional google.protobuf.Timestamp expire = 2;
+}
+
